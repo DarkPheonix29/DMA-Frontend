@@ -1,3 +1,5 @@
+# Scroll down for application structure
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +70,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+# Application Structure
+
+The files are made in a way that we can work with so called "components".
+
+Components are the different elements we can make. Each of these elements will be imported into bigger components.
+For example. If we have a navigation header. we can create a component for this and then import this component in the Home file. This home file will then be displayed through app.js.
+
+This structure is good for reusability and testing.
