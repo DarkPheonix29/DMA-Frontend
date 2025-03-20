@@ -1,12 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
-import Home from './components/Home';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MenuStartPage from './pages/customer/MenuStartPage';
+import MenuListPage from './pages/customer/MenuListPage';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<MenuStartPage />} />
+        <Route path='/menu/:category' element={<MenuListPage />} />
+      </Routes>
+    </Router>
+    // <div className="App">
+    //   <MenuStartPage />
+    // </div>
   );
 }
 
