@@ -1,15 +1,23 @@
 @import "tailwindcss";
 
+@theme {
+  --color-pastelred-700: #a64244; /* main background color */
+  --color-pastelred-400: #ea9e9e; /* button color */
+  --color-pastelred-300: #f1b1b1; /* button hover color */
+  --color-pastelred-200: #f8c4c4; /* payment tab color */
+  --color-pastelred-100: #ffeeee; /* order on it way color */
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
