@@ -1,11 +1,45 @@
 @import "tailwindcss";
 
 @theme {
+  --color-pastelred-900: #940000; /* menu line color */
   --color-pastelred-700: #a64244; /* main background color */
   --color-pastelred-400: #ea9e9e; /* button color */
   --color-pastelred-300: #f1b1b1; /* button hover color */
   --color-pastelred-200: #f8c4c4; /* payment tab color */
   --color-pastelred-100: #ffeeee; /* order on it way color */
+
+  --animate-fade-in: fade-in 0.1s ease-in-out;
+  --animate-fade-out: fade-out 0.1s ease-in-out;
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(5px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes fade-out {
+    0% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateY(-5px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
 }
 
 body {
