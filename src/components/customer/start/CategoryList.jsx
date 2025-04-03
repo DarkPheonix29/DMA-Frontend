@@ -1,26 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import CategoryButton from "./CategoryButton";
+import breakfestImg from "../../../assets/images/categories/ontbijt.png";
+import lunchImg from "../../../assets/images/categories/lunch.png";
+import dinnerImg from "../../../assets/images/categories/dinner.png";
+import drinksImg from "../../../assets/images/categories/drinks.png";
+import dessertsImg from "../../../assets/images/categories/toetje.png";
+import sidesImg from "../../../assets/images/categories/bijgerecht.png";
 
 const categories = [
-    "Breakfast",
-    "Lunch",
-    "Dinner",
-    "Drinks",
-    "Desserts",
-    "Sides"
+    { name: "Breakfast", image: breakfestImg },
+    { name: "Lunch", image: lunchImg },
+    { name: "Dinner", image: dinnerImg },
+    { name: "Drinks", image: drinksImg },
+    { name: "Desserts", image: dessertsImg },
+    { name: "Sides", image: sidesImg }
 ];
 
 const CategoryList = () => {
     const navigate = useNavigate();
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-6">
-            <h1 className="text-2xl font-bold mb-4">Kies een categorie</h1>
-            <div className="flex flex-wrap gap-4">
-                {categories.map((category) => (
-                    <CategoryButton key={category} text={category} onClick={() => navigate(`/menu/${category}`)} />
-                ))}
-            </div>
+        <div className="flex flex-wrap gap-4 justify-evenly">
+            {categories.map(({name, image}) => (
+                <CategoryButton key={name} text={name} image={image} onClick={() => navigate(`/menu/${name}`)} />
+            ))}
         </div>
     );
 }
