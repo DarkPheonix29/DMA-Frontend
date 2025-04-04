@@ -3,7 +3,7 @@ import MenuItem from "./MenuItem";
 const MenuList = ({ items }) => {
     console.log(items);
     return (
-    <ul className="flex flex-col items-center w-full">
+    <ul className="flex flex-col items-center w-full mt-30">
         {items.length > 0 ? (
             items.map((item) => (
                 <MenuItem

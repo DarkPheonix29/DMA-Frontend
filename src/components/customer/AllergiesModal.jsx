@@ -11,11 +11,11 @@ const AllergiesModal = ({ onClose }) => {
 
     const handleClose = () => {
         setClosing(true);
-        setTimeout(onClose, 300); // Wait for the animation to finish before calling onClose
+        setTimeout(onClose, 100); // Wait for the animation to finish before calling onClose
     }
 
     return (
-        <div className={`fixed inset-0 flex justify-center items-center z-50 ${closing ? "animate-fade-in" : "animate-fade-out"}`}>
+        <div className={`fixed inset-0 flex justify-center items-center z-50 ${closing ? "animate-fade-out" : "animate-fade-in"}`}>
             {/* Overlay */}
             <div className="absolute inset-0 bg-opacity-30 backdrop-blur-md" onClick={handleClose}></div>
 

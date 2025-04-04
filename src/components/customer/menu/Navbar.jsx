@@ -8,7 +8,7 @@ const Navbar = ({onSearch, onFilterAllergies }) => {
     const [searchTerm, setSearchTerm] = useState("");
 
     return (
-        <nav className="sticky top-0 flex flex-wrap justify-around items-center p-2 bg-pastelred-400 shadow-md gap-5">
+        <nav className="fixed top-0 left-0 flex flex-wrap justify-around items-center p-2 bg-pastelred-400 shadow-md gap-5">
             {/* Zoekbalk */}
             <input
                 type="text"

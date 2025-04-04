@@ -13,7 +13,6 @@ const MenuStartPage = () => {
                 <CategoryList />
             </div>
         </div>
-        
     );
 }
 

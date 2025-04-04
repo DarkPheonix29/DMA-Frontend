@@ -4,11 +4,12 @@ import Navbar from "../../components/customer/menu/Navbar";
 import MenuList from "../../components/customer/menu/MenuList";
 import Pancakes from "../../assets/images/dishes/pancakes.jpg";
 import BaconAndEggs from "../../assets/images/dishes/bacon_and_eggs.jpeg";
+import GrilledCheeseSandwich from "../../assets/images/dishes/grilled_cheese_sandwich.jpg";
 
 const MenuItems = [
-    { id: 1, name: "Pancakes", category: "Breakfast", price: 5.99, description: "Fluffy pancakes served with syrup.", image: Pancakes },
-    { id: 2, name: "Bacon and Eggs", category: "Breakfast", price: 7.99, description: "Classic breakfast with crispy bacon and eggs.", image: BaconAndEggs },
-    { id: 3, name: "Grilled Cheese Sandwich", category: "Lunch", price: 4.99, description: "Toasted sandwich with melted cheese." },
+    { id: 1, name: "Pancakes", category: "Lunch", price: 5.99, description: "Fluffy pancakes served with syrup.", image: Pancakes },
+    { id: 2, name: "Bacon and Eggs", category: "Lunch", price: 7.99, description: "Classic breakfast with crispy bacon and eggs.", image: BaconAndEggs },
+    { id: 3, name: "Grilled Cheese Sandwich", category: "Lunch", price: 4.99, description: "Toasted sandwich with melted cheese.", image: GrilledCheeseSandwich },
     { id: 4, name: "Spaghetti Bolognese", category: "Dinner", price: 9.99, description: "Pasta with a rich meat sauce." },
     { id: 5, name: "Coca Cola", category: "Drinks", price: 1.99, description: "Refreshing soft drink." },
     { id: 6, name: "Apple Pie", category: "Desserts", price: 3.99, description: "Homemade apple pie with vanilla ice cream." }

@@ -12,15 +12,11 @@
   --animate-fade-out: fade-out 0.1s ease-in-out;
 
   @keyframes fade-in {
-    0% {
+    from {
       opacity: 0;
       transform: translateY(10px);
     }
-    50% {
-      opacity: 0.5;
-      transform: translateY(5px);
-    }
-    100% {
+    to {
       opacity: 1;
       transform: translateY(0px);
     }

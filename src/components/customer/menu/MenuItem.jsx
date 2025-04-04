@@ -7,9 +7,11 @@ const MenuItem = ({ item, onClick }) => {
             <div className="bg-pastelred-900 h-px w-full"></div>
             <img src={item.image} alt={item.name} className=" aspect-video object-cover py-3" />
             <div>
-                <p className="text-xl float-left ">{item.name}</p>
-                <p className="text-lg float-right">€ {item.price}</p>
-                <p className="left-0 bottom-0">{item.description}</p>
+                <div className="flex justify-between items-center mb-1">
+                    <h3 className="text-xl">{item.name}</h3>
+                    <span className="text-lg">€ {item.price}</span>
+                </div>
+                <p className="text-sm float-left">{item.description}</p>
             </div>
         </button>
     );
