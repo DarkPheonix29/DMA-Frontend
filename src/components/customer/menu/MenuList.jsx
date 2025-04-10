@@ -1,3 +1,22 @@
-// Main file to render the menu component
+import MenuItem from "./MenuItem";
 
-// Will render the different components that wil make up the menu
+const MenuList = ({ items }) => {
+    console.log(items);
+    return (
+    <ul className="flex flex-col items-center w-full mt-30">
+        {items.length > 0 ? (
+            items.map((item) => (
+                <MenuItem
+                    key={item.id}
+                    item={item}
+                    onClick={() => alert(`Item clicked: ${item.name}`)}
+                />
+            ))
+        ) : (
+            <p className="text-gray-500">Geen items gevonden.</p>
+        )}
+    </ul>
+    );
+};
+
+export default MenuList;

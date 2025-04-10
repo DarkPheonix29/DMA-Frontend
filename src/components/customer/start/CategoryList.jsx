@@ -8,7 +8,6 @@ import dessertsImg from "../../../assets/images/categories/toetje.png";
 import sidesImg from "../../../assets/images/categories/bijgerecht.png";
 
 const categories = [
-    { name: "Breakfast", image: breakfestImg },
     { name: "Lunch", image: lunchImg },
     { name: "Dinner", image: dinnerImg },
     { name: "Drinks", image: drinksImg },
