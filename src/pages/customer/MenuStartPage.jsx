@@ -1,9 +1,18 @@
 import React from 'react';
+import { useEffect } from 'react';
 import CategoryList from '../../components/customer/start/CategoryList';
 import RequestWaiter from '../../components/customer/RequestWaiter';
 import AllergiesButton from '../../components/customer/AllergiesButton';
 
 const MenuStartPage = () => {
+    useEffect(() => {
+        const param = new URLSearchParams(window.location.search);
+        const tableId = param.get('table');
+        if (tableId) {
+            localStorage.setItem('tableId', tableId);
+        }
+    }, []);
+    
     return (
         <div>
             <div><p className='absolute underline right-4 top-3 font-semibold text-white'>Table 11</p></div> {/* To be changed with qr function */}
