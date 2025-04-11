@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AllergiesModal from "./AllergiesModal";
 
-const AllergiesButton = () => {
+const AllergiesButton = ({ className = "" }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const AllergiesButton = () => {
     return (
         <>
             <button 
-                className="px-4 py-2 bg-white rounded-lg shadow-md border"
+                className={`px-4 py-2 bg-white rounded-lg shadow-md border ${className}`}
                 onClick={() => setIsOpen(true)}
             >
                 Allergieën
