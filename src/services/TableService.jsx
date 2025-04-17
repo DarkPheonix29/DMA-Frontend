@@ -18,7 +18,7 @@ const Tables = [
     }
 ];
 
-export const getTableByGuid = async (uniqueCode) => {
+export const GetTableByGuid = async (uniqueCode) => {
     // Tijdelijk mocked data gebruiken
     const table = Tables.find(table => table.uniqueCode === uniqueCode);
     if (!table) {
