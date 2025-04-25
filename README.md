@@ -1,4 +1,4 @@
-# Scroll down for application structure
+# React Frontend - Developer Guide
 
 # Getting Started with Create React App
 
@@ -8,74 +8,71 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm start`
+- `npm start` - Runs the app in the development mode.\
+  Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+  The page will reload when you make changes.\
+  You may also see any lint errors in the console.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- `npm test` - Launches the test runner in the interactive watch mode.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- `npm run build` - Builds the app for production to the `build` folder.\
+  It correctly bundles React in production mode and optimizes the build for the best performance.\
+  The build is minified and the filenames include the hashes.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `npm run eject` - **Note: this is a one-way operation. Once you `eject`, you can't go back!**\
+  If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
 # Application Structure
 
-The files are made in a way that we can work with so called "components".
+We follow a **component-based structure** to ensure scalability, reusability and ease of testing.
 
-Components are the different elements we can make. Each of these elements will be imported into bigger components.
-For example. If we have a navigation header. we can create a component for this and then import this component in the Home file. This home file will then be displayed through app.js.
+## Components
 
-This structure is good for reusability and testing.
+Each UI element is a **component**. Smaller components are composed into larger ones:
+
+> Example: A `Navbar` component is created and used inside the `Home` page component, which is then rendered by `App.js`.
+
+```
+src/
+├── components/             # Reusable UI components
+│   ├── Menu/
+│   │   ├── MenuList.jsx
+│   │   └── MenuItem.jsx
+│   ├── Start/
+│   │   ├── CategoryButton.jsx
+│   │   └── CategoryList.jsx
+│   └── RequestWaiter.jsx
+├── pages/                  # Pages or views
+│   └── Home.jsx
+├── services/               # API service modules
+│   └── TableService.js
+├── App.js
+└── index.js
+```
+
+# Naming Conventions
+
+- **File & Component Names:** `PascalCase` (e.g., `CategoryList.jsx`)
+- **Functions & Variables:** `camelCase` (e.g., `handleClick`, `userList`)
+- **CSS Classes (if not Tailwind):** `kebab-case`
+- **Hooks:** Start custom hooks with `use` (e.g., useAuth)
+
+# React Best Practices
+
+- Use **functional components** and **hooks** (`useState`, `useEffect`, etc)
+- **One component = One responsibility**
+- Group logic with related UI as much as possible
+- Keep component files under ~200 lines for clarity
+
+# Tailwind CSS Conventions
+
+- Use **utility-first** styling.
+- Structure classes with intention:
+
+```
+<div className="p-4 bg-white rounded-lg shadow-md">
+  <h1 className="text-xl font-bold">Hello</h1>
+</div>
+```
+
+- Prefer **custom utility classes** via Tailwind `Theme` over inline styles or vanilla CSS
