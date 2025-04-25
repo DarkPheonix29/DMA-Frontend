@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import CategoryList from '../../components/customer/start/CategoryList';
 import RequestWaiter from '../../components/customer/RequestWaiter';
 import AllergiesButton from '../../components/customer/AllergiesButton';
-import { getTableByGuid } from '../../services/TableService';
+import { GetTableByGuid } from '../../services/TableService';
 
 const MenuStartPage = () => {
     const [tableName, setTableName] = React.useState(null);
@@ -13,7 +13,7 @@ const MenuStartPage = () => {
         const tableGuid = param.get('table');
 
         if (tableGuid) {
-            getTableByGuid(tableGuid)
+            GetTableByGuid(tableGuid)
                 .then((table) => {
                     localStorage.setItem('tableId', table.id);
                     localStorage.setItem('tableName', table.name);
