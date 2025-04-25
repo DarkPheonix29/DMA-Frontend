@@ -1,6 +1,6 @@
 import MenuItem from "./MenuItem";
 
-const MenuList = ({ items }) => {
+const MenuList = ({ items, onItemClick }) => {
     console.log(items);
     return (
     <ul className="flex flex-col items-center w-full mt-30">
@@ -9,7 +9,7 @@ const MenuList = ({ items }) => {
                 <MenuItem
                     key={item.id}
                     item={item}
-                    onClick={() => alert(`Item clicked: ${item.name}`)}
+                    onClick={() => onItemClick(item)}
                 />
             ))
         ) : (

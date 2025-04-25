@@ -11,7 +11,7 @@ const AllergiesModal = ({ onClose }) => {
 
     const handleClose = () => {
         setClosing(true);
-        setTimeout(onClose, 100); // Wait for the animation to finish before calling onClose
+        setTimeout(onClose, 100);
     }
 
     return (
