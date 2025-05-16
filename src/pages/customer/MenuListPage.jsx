@@ -1,15 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import axios from "axios";
 import Navbar from "../../components/customer/menu/Navbar";
 import MenuList from "../../components/customer/menu/MenuList";
-import Pancakes from "../../assets/images/dishes/pancakes.jpg";
-import BaconAndEggs from "../../assets/images/dishes/bacon_and_eggs.jpeg";
-import GrilledCheeseSandwich from "../../assets/images/dishes/grilled_cheese_sandwich.jpg";
 import AddItemModal from "../../components/customer/menu/AddItemModel";
 import FullCartView from "../../components/customer/winkelmandje/FullCartView";
-
 
 const MenuListPage = () => {
     const { category } = useParams();
@@ -21,10 +16,11 @@ const MenuListPage = () => {
     const [showCart, setShowCart] = useState(false);
 
     useEffect(() => {
-        axios.get("/api/dish") 
+        axios.get("/api/Dish")
             .then((response) => {
                 setMenuItems(response.data);
                 console.log(menuItems[0]);
+
             })
             .catch((error) => {
                 console.error("Error fetching dishes:", error);
@@ -41,8 +37,6 @@ const MenuListPage = () => {
         console.log("Filter allergies clicked");
     };
 
-    
-
     return (
         <div className="min-h-screen flex flex-col items-center bg-gray-100">
             <Navbar
@@ -58,16 +52,26 @@ const MenuListPage = () => {
                     item={selectedItem}
                     onClose={() => setSelectedItem(null)}
                     onAdd={(item, qty) => {
+                        const dishId = item.dishId || item.id;
+
                         setCartItems((prev) => {
-                            const existing = prev.find(i => i.id === item.id);
+                            const existing = prev.find(i => i.dishId === dishId);
+
                             if (existing) {
                                 return prev.map(i =>
-                                    i.id === item.id ? { ...i, quantity: i.quantity + qty } : i
+                                    i.dishId === dishId
+                                        ? { ...i, quantity: i.quantity + qty }
+                                        : i
                                 );
                             } else {
-                                return [...prev, { ...item, quantity: qty }];
+                                return [...prev, {
+                                    ...item,
+                                    quantity: qty,
+                                    dishId: dishId
+                                }];
                             }
                         });
+
                         setSelectedItem(null);
                     }}
                 />
@@ -77,9 +81,7 @@ const MenuListPage = () => {
                 <FullCartView
                     items={cartItems}
                     onClose={() => setShowCart(false)}
-                    onCheckout={() => {
-                        console.log("Bestelling geplaatst:", cartItems);
-                    }}
+                    onClearCart={() => setCartItems([])}
                 />
             )}
         </div>

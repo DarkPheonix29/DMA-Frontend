@@ -5,17 +5,20 @@ import MenuStartPage from './pages/customer/MenuStartPage';
 import MenuListPage from './pages/customer/MenuListPage';
 
 const App = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path='/' element={<MenuStartPage />} />
-        <Route path='/menu/:category' element={<MenuListPage />} />
-      </Routes>
-    </Router>
-    // <div className="App">
-    //   <MenuStartPage />
-    // </div>
-  );
+    return (
+        <Router>
+            <Routes>
+                {/* Route voor QR-code met tafel GUID */}
+                <Route path='/menu/table/:tableGuid' element={<MenuStartPage />} />
+
+                {/* Eventuele standaard startpagina */}
+                <Route path='/' element={<MenuStartPage />} />
+
+                {/* Menu op basis van categorie */}
+                <Route path='/menu/:category' element={<MenuListPage />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
