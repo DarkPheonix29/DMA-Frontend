@@ -1,21 +1,21 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import CategoryList from '../../components/customer/start/CategoryList';
 import RequestWaiter from '../../components/customer/RequestWaiter';
 import AllergiesButton from '../../components/customer/AllergiesButton';
 import { GetTableByGuid } from '../../services/TableService';
 
 const MenuStartPage = () => {
-    const [tableName, setTableName] = React.useState(null);
+    const [tableName, setTableName] = useState(null);
+    const { tableGuid } = useParams();
 
     useEffect(() => {
-        const param = new URLSearchParams(window.location.search);
-        const tableGuid = param.get('table');
-
         if (tableGuid) {
             GetTableByGuid(tableGuid)
                 .then((table) => {
-                    localStorage.setItem('tableId', table.id);
+                    console.log("Tafel opgehaald:", table);
+
+                    localStorage.setItem('tableId', table.tableId); // <-- ✅ FIX
                     localStorage.setItem('tableName', table.name);
                     localStorage.setItem('tableUniqueCode', table.uniqueCode);
 
@@ -27,15 +27,11 @@ const MenuStartPage = () => {
                 });
         } else {
             const storedTableName = localStorage.getItem('tableName');
-            if (storedTableName) {
-                setTableName(storedTableName);
-            } else {
-                setTableName('Geen tafel gevonden');
-            }
-
+            setTableName(storedTableName || 'Geen tafel gevonden');
         }
-    }, []);
-    
+    }, [tableGuid]);
+
+
     return (
         <div>
             <div>
@@ -48,11 +44,11 @@ const MenuStartPage = () => {
                     <RequestWaiter className="flex-1 min-w-[150px]" />
                     <AllergiesButton className="flex-1 min-w-[100px]" />
                 </div>
-                
+
                 <CategoryList />
             </div>
         </div>
     );
-}
+};
 
 export default MenuStartPage;
