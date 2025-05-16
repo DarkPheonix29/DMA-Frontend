@@ -18,19 +18,16 @@ const MenuListPage = () => {
     useEffect(() => {
         axios.get("/api/Dish")
             .then((response) => {
-                // Map dishID → id zodat React componenten ermee kunnen werken
-                const mappedDishes = response.data.map(dish => ({
-                    ...dish,
-                    id: dish.dishID
-                }));
-                setMenuItems(mappedDishes);
+                setMenuItems(response.data);
+                console.log(menuItems[0]);
+
             })
             .catch((error) => {
                 console.error("Error fetching dishes:", error);
             });
     }, []);
-
-    const filteredMenuItems = menuItems.filter((item) => item.category === category);
+    
+    const filteredMenuItems = menuItems.filter((item) => item.categories[0] === category);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
