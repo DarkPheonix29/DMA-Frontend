@@ -42,19 +42,25 @@ const MenuItem = ({ item, onClick }) => {
                 <div className="flex justify-between items-center mb-1">
                     <div className="flex items-center gap-2">
                         <h3 className="text-xl">{item.name}</h3>
-                        
+                        {console.log("Item test")}
+                        {console.log(item)}
                         {item.allergens && item.allergens.length > 0 && (
                             <div className="flex items-center gap-1">
-                                {item.allergens.map((allergy) => 
-                                    allergyIcons[allergy] ? (
-                                        <img
-                                            key={allergy}
-                                            src={allergyIcons[allergy]}
-                                            alt={allergy}
-                                            className="w-6 h-6"
-                                        />
-                                    ) : null
-                                    )}
+                                {item.allergens.map((allergy) => {
+                                    if (allergyIcons[allergy]) {
+                                        return (
+                                            <img
+                                                key={allergy}
+                                                src={allergyIcons[allergy]}
+                                                alt={allergy}
+                                                className="w-5 h-5"
+                                            />
+                                        )
+                                    } else {
+                                        console.warn(`⚠️ Allergie-icoon niet gevonden voor: "${allergy}"`);
+                                        return null;
+                                    }
+                                })}
                             </div>
                         )}
                     </div>

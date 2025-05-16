@@ -9,10 +9,10 @@ import sidesImg from "../../../assets/images/categories/bijgerecht.png";
 
 const categories = [
     { name: "Lunch", image: lunchImg },
-    { name: "Dinner", image: dinnerImg },
-    { name: "Drinks", image: drinksImg },
-    { name: "Desserts", image: dessertsImg },
-    { name: "Sides", image: sidesImg }
+    { name: "Diner", image: dinnerImg },
+    { name: "Drinken", image: drinksImg },
+    { name: "Dessert", image: dessertsImg },
+    { name: "Bijgerechten", image: sidesImg }
 ];
 
 const CategoryList = () => {

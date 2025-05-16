@@ -24,13 +24,14 @@ const MenuListPage = () => {
         axios.get("/api/dish") 
             .then((response) => {
                 setMenuItems(response.data);
+                console.log(menuItems[0]);
             })
             .catch((error) => {
                 console.error("Error fetching dishes:", error);
             });
     }, []);
-
-    const filteredMenuItems = menuItems.filter((item) => item.category === category);
+    
+    const filteredMenuItems = menuItems.filter((item) => item.categories[0] === category);
 
     const handleSearch = (query) => {
         setSearchQuery(query);
