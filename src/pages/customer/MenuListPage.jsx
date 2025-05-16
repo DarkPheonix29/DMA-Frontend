@@ -19,8 +19,6 @@ const MenuListPage = () => {
         axios.get("/api/Dish")
             .then((response) => {
                 setMenuItems(response.data);
-                console.log(menuItems[0]);
-
             })
             .catch((error) => {
                 console.error("Error fetching dishes:", error);

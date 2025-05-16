@@ -42,8 +42,6 @@ const MenuItem = ({ item, onClick }) => {
                 <div className="flex justify-between items-center mb-1">
                     <div className="flex items-center gap-2">
                         <h3 className="text-xl">{item.name}</h3>
-                        {console.log("Item test")}
-                        {console.log(item)}
                         {item.allergens && item.allergens.length > 0 && (
                             <div className="flex items-center gap-1">
                                 {item.allergens.map((allergy) => {
