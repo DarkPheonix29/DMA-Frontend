@@ -18,15 +18,18 @@ const MenuListPage = () => {
     useEffect(() => {
         axios.get("/api/Dish")
             .then((response) => {
-                setMenuItems(response.data);
-                console.log(menuItems[0]);
-
+                console.log("Dishes from API:", response.data);
+                const dataWithDishId = response.data.map(dish => ({
+                    ...dish,
+                    dishId: dish.dishId || dish.dishID || dish.id // ✅ normalize dishId
+                }));
+                setMenuItems(dataWithDishId);
             })
             .catch((error) => {
                 console.error("Error fetching dishes:", error);
             });
     }, []);
-    
+
     const filteredMenuItems = menuItems.filter((item) => item.categories[0] === category);
 
     const handleSearch = (query) => {
@@ -52,7 +55,12 @@ const MenuListPage = () => {
                     item={selectedItem}
                     onClose={() => setSelectedItem(null)}
                     onAdd={(item, qty) => {
-                        const dishId = item.dishId || item.id;
+                        const dishId = item.dishId;
+
+                        if (!dishId) {
+                            console.error("Geen geldig dishId gevonden voor item:", item);
+                            return;
+                        }
 
                         setCartItems((prev) => {
                             const existing = prev.find(i => i.dishId === dishId);
@@ -67,7 +75,7 @@ const MenuListPage = () => {
                                 return [...prev, {
                                     ...item,
                                     quantity: qty,
-                                    dishId: dishId
+                                    dishId // ✅ zorg dat hij er altijd in zit
                                 }];
                             }
                         });
