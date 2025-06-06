@@ -16,8 +16,7 @@ const AddItemModal = ({ item, onClose, onAdd }) => {
         onAdd(itemWithDishId, quantity);
         onClose();
     };
-
-
+    //
     return (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black/40 backdrop-blur-sm">
             <div className="bg-pastelred-300 rounded-xl p-6 w-[90%] max-w-md shadow-lg relative">

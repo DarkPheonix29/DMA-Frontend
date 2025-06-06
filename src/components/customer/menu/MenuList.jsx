@@ -13,7 +13,7 @@ const MenuList = ({ items, onItemClick }) => {
                     </li>
                 ))
             ) : (
-                <p className="text-gray-500">Geen items gevonden.</p>
+                <p className="text-gray-500">Geen item gevonden.</p>
             )}
         </ul>
     );
