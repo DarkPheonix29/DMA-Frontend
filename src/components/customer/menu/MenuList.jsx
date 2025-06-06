@@ -60,7 +60,6 @@ const MenuList = ({ items, onItemClick }) => {
         <ul className="flex flex-col items-center w-full mt-30">
             {items.length > 0 ? (
                 items.map((item) => (
-                    <li key={item.dishID} className="w-full">
                         <MenuItem
                             item={item}
                             allergyIcons={allergyIcons}

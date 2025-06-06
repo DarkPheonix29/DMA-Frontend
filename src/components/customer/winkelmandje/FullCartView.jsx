@@ -1,7 +1,10 @@
 
 import React from "react";
+import { createOrder } from "../../../services/OrderService"; // of jouw juiste pad
 
-const FullCartView = ({ items, onClose, onCheckout }) => {
+const FullCartView = ({ items, onClose, onCheckout, onClearCart }) => {
+    const [loading, setLoading] = React.useState(false);
+    const [error, setError] = React.useState(null);
 
     const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const tableName = localStorage.getItem("tableName") || "Tafel onbekend";
@@ -72,13 +75,13 @@ const FullCartView = ({ items, onClose, onCheckout }) => {
                     <p className="text-center text-gray-500">Winkelmandje is leeg.</p>
                 ) : (
                     items.map((item) => (
-                        <div key={item.id} className="flex justify-between mb-2">
-
+                        <div key={item.dishId} className="flex justify-between mb-2">
                             <span>{item.name} × {item.quantity}</span>
                             <span>€{(item.price * item.quantity).toFixed(2)}</span>
                         </div>
                     ))
                 )}
+
                 <div className="flex justify-between font-semibold border-t pt-3 mt-4">
                     <span>IN TOTAAL</span>
                     <span>€{total.toFixed(2)}</span>
@@ -87,7 +90,7 @@ const FullCartView = ({ items, onClose, onCheckout }) => {
 
             {/* Bestelknop onderaan */}
             <button
-                onClick={() => alert("Bestelling geplaatst!")}
+                onClick={handleCheckout}
                 className="bg-pastelred-100 mt-5 text-xl font-semibold rounded-lg py-3 shadow"
             >
                 BESTEL
