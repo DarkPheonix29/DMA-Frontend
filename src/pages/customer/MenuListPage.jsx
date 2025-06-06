@@ -18,12 +18,7 @@ const MenuListPage = () => {
     useEffect(() => {
         axios.get("/api/Dish")
             .then((response) => {
-                console.log("Dishes from API:", response.data);
-                const dataWithDishId = response.data.map(dish => ({
-                    ...dish,
-                    dishId: dish.dishId || dish.dishID || dish.id // ✅ normalize dishId
-                }));
-                setMenuItems(dataWithDishId);
+
             })
             .catch((error) => {
                 console.error("Error fetching dishes:", error);
