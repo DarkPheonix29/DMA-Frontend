@@ -30,7 +30,13 @@ const MenuListPage = () => {
             });
     }, []);
 
-    const filteredMenuItems = menuItems.filter((item) => item.categories[0] === category);
+    // ✅ Case-insensitive filtering, werkt ook als er meerdere categorieën zijn
+    const filteredMenuItems = menuItems.filter(
+        (item) =>
+            item.categories?.some(
+                (cat) => cat.toLowerCase() === category?.toLowerCase()
+            )
+    );
 
     const handleSearch = (query) => {
         setSearchQuery(query);
