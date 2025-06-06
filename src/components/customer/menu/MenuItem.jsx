@@ -1,6 +1,6 @@
 
 const MenuItem = ({ item, onClick, allergyIcons }) => {
-    
+
     return (
         <button
             onClick={onClick}
@@ -30,7 +30,7 @@ const MenuItem = ({ item, onClick, allergyIcons }) => {
                             </div>
                         )}
                     </div>
-                    
+
                     <span className="text-lg">€ {item.price}</span>
                 </div>
                 <p className="text-sm float-left">{item.description}</p>
