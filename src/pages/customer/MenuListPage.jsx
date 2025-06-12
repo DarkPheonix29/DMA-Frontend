@@ -113,6 +113,7 @@ const MenuListPage = () => {
             {showCart && (
                 <FullCartView
                     items={cartItems}
+                    setCartItems={setCartItems} // ✅ toevoegen
                     onClose={() => setShowCart(false)}
                     onClearCart={handleClearCart}
                 />
