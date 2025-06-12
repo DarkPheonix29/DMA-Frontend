@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Navbar from "../../components/customer/menu/Navbar";
 import MenuList from "../../components/customer/menu/MenuList";
@@ -9,19 +9,37 @@ import FullCartView from "../../components/customer/winkelmandje/FullCartView";
 const MenuListPage = () => {
     const { category } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+
     const [searchQuery, setSearchQuery] = useState("");
     const [menuItems, setMenuItems] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(() => {
+        const stored = sessionStorage.getItem("cartItems");
+        return stored ? JSON.parse(stored) : [];
+    });
     const [showCart, setShowCart] = useState(false);
 
+    // 🧠 Laad cart uit sessionStorage bij elke categorie-wijziging
+    useEffect(() => {
+        const storedCart = sessionStorage.getItem("cartItems");
+        if (storedCart) {
+            setCartItems(JSON.parse(storedCart));
+        }
+    }, [category]);
+
+    // 💾 Sla cart op in sessionStorage bij wijzigingen
+    useEffect(() => {
+        sessionStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
+
+    // 🍽️ Laad alle gerechten
     useEffect(() => {
         axios.get("/api/Dish")
             .then((response) => {
-                console.log("Dishes from API:", response.data);
                 const dataWithDishId = response.data.map(dish => ({
                     ...dish,
-                    dishId: dish.dishId || dish.dishID || dish.id // ✅ normalize dishId
+                    dishId: dish.dishId || dish.dishID || dish.id
                 }));
                 setMenuItems(dataWithDishId);
             })
@@ -30,7 +48,6 @@ const MenuListPage = () => {
             });
     }, []);
 
-    // ✅ Case-insensitive filtering, werkt ook als er meerdere categorieën zijn
     const filteredMenuItems = menuItems.filter(
         (item) =>
             item.categories?.some(
@@ -44,6 +61,35 @@ const MenuListPage = () => {
 
     const handleFilterAllergies = () => {
         console.log("Filter allergies clicked");
+    };
+
+    const handleAddToCart = (item, qty) => {
+        const dishId = item.dishId ?? item.id;
+        if (!dishId) {
+            console.error("Geen geldig dishId gevonden voor item:", item);
+            return;
+        }
+
+        setCartItems((prev) => {
+            const existing = prev.find(i => i.dishId === dishId);
+
+            if (existing) {
+                return prev.map(i =>
+                    i.dishId === dishId
+                        ? { ...i, quantity: i.quantity + qty }
+                        : i
+                );
+            } else {
+                return [...prev, { ...item, quantity: qty, dishId }];
+            }
+        });
+
+        setSelectedItem(null);
+    };
+
+    const handleClearCart = () => {
+        setCartItems([]);
+        sessionStorage.removeItem("cartItems");
     };
 
     return (
@@ -60,34 +106,7 @@ const MenuListPage = () => {
                 <AddItemModal
                     item={selectedItem}
                     onClose={() => setSelectedItem(null)}
-                    onAdd={(item, qty) => {
-                        const dishId = item.dishId;
-
-                        if (!dishId) {
-                            console.error("Geen geldig dishId gevonden voor item:", item);
-                            return;
-                        }
-
-                        setCartItems((prev) => {
-                            const existing = prev.find(i => i.dishId === dishId);
-
-                            if (existing) {
-                                return prev.map(i =>
-                                    i.dishId === dishId
-                                        ? { ...i, quantity: i.quantity + qty }
-                                        : i
-                                );
-                            } else {
-                                return [...prev, {
-                                    ...item,
-                                    quantity: qty,
-                                    dishId // ✅ zorg dat hij er altijd in zit
-                                }];
-                            }
-                        });
-
-                        setSelectedItem(null);
-                    }}
+                    onAdd={handleAddToCart}
                 />
             )}
 
@@ -95,7 +114,7 @@ const MenuListPage = () => {
                 <FullCartView
                     items={cartItems}
                     onClose={() => setShowCart(false)}
-                    onClearCart={() => setCartItems([])}
+                    onClearCart={handleClearCart}
                 />
             )}
         </div>
