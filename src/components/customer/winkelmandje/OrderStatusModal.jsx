@@ -1,23 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import {useOrders} from "../../../services/OrderHubProvider";
 
-// Dummy data – vervang dit straks met een API-call
-const DUMMY_ORDERS = [
-    {
-        orderId: 101,
-        items: [
-            { name: "Cheeseburger", quantity: 2, status: "In voorbereiding" },
-            { name: "Cola", quantity: 1, status: "Geserveerd" },
-        ],
-    },
-    {
-        orderId: 102,
-        items: [
-            { name: "Pizza Margherita", quantity: 1, status: "Wacht op keuken" },
-        ],
-    },
-];
-
-// Status → kleur mapping
 const statusColorMap = {
     "Geserveerd": "text-green-600",
     "In voorbereiding": "text-orange-500",
@@ -26,18 +9,7 @@ const statusColorMap = {
 };
 
 const OrderStatusModal = ({ onClose }) => {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        // Simuleer laden met dummy data
-        const timeout = setTimeout(() => {
-            setOrders(DUMMY_ORDERS);
-            setLoading(false);
-        }, 500);
-
-        return () => clearTimeout(timeout);
-    }, []);
+    const { orders, loading } = useOrders();
 
     return (
         <div className="fixed inset-0 z-50 flex justify-center items-center bg-black/30 backdrop-blur-sm">

@@ -51,7 +51,7 @@ const MenuListPage = () => {
     const filteredMenuItems = menuItems.filter(
         (item) =>
             item.categories?.some(
-                (cat) => cat.toLowerCase() === category?.toLowerCase()
+                (cat) => cat.name?.toLowerCase() === category?.toLowerCase()
             )
     );
 

@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { OrderHubProvider } from './services/OrderHubProvider';
 import MenuStartPage from './pages/customer/MenuStartPage';
 import MenuListPage from './pages/customer/MenuListPage';
 
 const App = () => {
     return (
+        <OrderHubProvider>
         <Router>
             <Routes>
                 {/* Route voor QR-code met tafel GUID */}
@@ -18,6 +20,7 @@ const App = () => {
                 <Route path='/menu/:category' element={<MenuListPage />} />
             </Routes>
         </Router>
+        </OrderHubProvider>
     );
 }
 
